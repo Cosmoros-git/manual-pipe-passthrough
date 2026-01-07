@@ -1,0 +1,4 @@
+---------------------------------------------------------------------------------------------------
+Version: 0.1.0
+Date: 2026-01-07
+    - Release. This is currently a WIP mod. I'm still working on adding more fixes to machines. 
