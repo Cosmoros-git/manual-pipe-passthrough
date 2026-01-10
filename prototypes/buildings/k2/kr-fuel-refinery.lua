@@ -4,13 +4,14 @@ local replace = replace_func.replace_fluid_boxes
 
 local machine_name = "kr-fuel-refinery"
 local machine_type = "assembling-machine"
+local pipe_volume = 2000
 
 local function replace_4way_graphics()
   local refinery = data.raw[machine_type][machine_name]
 
   if refinery then
       if not refinery then
-    logger.error("Fuel Refinery not found")
+       logger.error(machine_name .." not found")
     return
   end
 
@@ -19,7 +20,7 @@ local function replace_4way_graphics()
         layers =
         {
           {
-            filename = "__manual-pipe-passthrough__/graphics/buildings/fuel-refinery/kr-fuel-refinery-pipes-draw-under.png",
+            filename = "__manual-pipe-passthrough__/graphics/buildings/kr/fuel-refinery/pipes-below.png",
             width = 244,
             height = 268,
             frame_count = 1,
@@ -35,7 +36,7 @@ local function replace_4way_graphics()
             scale = 0.5,
           },
           {
-            filename = "__manual-pipe-passthrough__/graphics/buildings/fuel-refinery/kr-fuel-refinery-pipes-draw-above.png",
+            filename = "__manual-pipe-passthrough__/graphics/buildings/kr/fuel-refinery/pipes-above.png",
             width = 244,
             height = 268,
             frame_count = 1,
@@ -63,7 +64,7 @@ local new_fluid_boxes =
       {
         production_type = "input",
         pipe_covers = pipecoverspictures(),
-        volume = 2000,
+        volume = pipe_volume,
         pipe_connections = {
           { flow_direction = "input-output", direction = defines.direction.north, position = { -1, -1 } },
           { flow_direction = "input-output", direction = defines.direction.south, position = { -1,  1 } },
@@ -74,7 +75,7 @@ local new_fluid_boxes =
       {
         production_type = "input",
         pipe_covers = pipecoverspictures(),
-        volume = 2000,
+        volume = pipe_volume,
         pipe_connections = {
           { flow_direction = "input-output", direction = defines.direction.south, position = {  1,  1 } },
           { flow_direction = "input-output", direction = defines.direction.north, position = {  1, -1 } },
@@ -84,7 +85,7 @@ local new_fluid_boxes =
         production_type = "output",
         pipe_covers = pipecoverspictures(),
         pipe_pictures =assembler2pipepictures(),
-        volume = 2000,
+        volume = pipe_volume,
         pipe_connections = {
         { flow_direction = "input-output", direction = defines.direction.east, position = { 1, 0 } },
         { flow_direction = "input-output", direction = defines.direction.west, position = { -1, 0 } } },
