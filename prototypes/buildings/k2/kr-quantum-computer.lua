@@ -5,6 +5,7 @@ local pipes_lib = require("lib.add-pipes-simple")
 local machine_name = "kr-quantum-computer"
 local machine_type = "assembling-machine"
 local pipe_volume = 500
+local pipe_output_multipler = 1/5
 
 local pipes_above = {
     filename = "__manual-pipe-passthrough__/graphics/buildings/kr/kr-quantum-computer/pipes-above.png",
@@ -42,45 +43,46 @@ local new_fluid_boxes =
     pipe_covers = pipecoverspictures(),
     volume = pipe_volume,
     pipe_connections = {
-      { flow_direction = "input-output", direction = defines.direction.west, position = { -2.5,  0.5 } },
+      { flow_direction = "input-output", direction = defines.direction.west, position = { -2.5, -0.5 }, primary = true },
       { flow_direction = "input-output", direction = defines.direction.east, position = {  2.5, -0.5 } },
     },
     secondary_draw_orders = { north = -1 },
-    always_draw_covers = true;
+    always_draw_covers = true,
   },
   {
     production_type = "input",
     pipe_covers = pipecoverspictures(),
     volume = pipe_volume,
     pipe_connections = {
-      { flow_direction = "input-output", direction = defines.direction.west, position = { -2.5, -0.5 } },
-      { flow_direction = "input-output", direction = defines.direction.east, position = {  2.5, 0.5 } },
+      { flow_direction = "input-output", direction = defines.direction.west, position = { -2.5,  0.5 }, primary = true },
+      { flow_direction = "input-output", direction = defines.direction.east, position = {  2.5,  0.5 } },
     },
     secondary_draw_orders = { north = -1 },
-    always_draw_covers = true;
+    always_draw_covers = true,
   },
   {
     production_type = "output",
     pipe_covers = pipecoverspictures(),
-    volume = pipe_volume,
+    volume = pipe_volume * pipe_output_multipler,
     pipe_connections = {
+      { flow_direction = "input-output", direction = defines.direction.north, position = { -0.5, -2.5 }, primary = true },
+      { flow_direction = "input-output", direction = defines.direction.south, position = { -0.5,  2.5 } },
+    },
+    secondary_draw_orders = { north = -1 },
+    always_draw_covers = true,
+  },
+  {
+    production_type = "output",
+    pipe_covers = pipecoverspictures(),
+    volume = pipe_volume * pipe_output_multipler,
+    pipe_connections = {
+      { flow_direction = "input-output", direction = defines.direction.north, position = {  0.5, -2.5 }, primary = true },
       { flow_direction = "input-output", direction = defines.direction.south, position = {  0.5,  2.5 } },
-      { flow_direction = "input-output", direction = defines.direction.north, position = { -0.5, -2.5 } },
     },
     secondary_draw_orders = { north = -1 },
-    always_draw_covers = true;
-  },
-  {
-    production_type = "output",
-    pipe_covers = pipecoverspictures(),
-    volume = pipe_volume,
-    pipe_connections = {
-      { flow_direction = "input-output", direction = defines.direction.south, position = {  -0.5,  2.5 } },
-      { flow_direction = "input-output", direction = defines.direction.north, position = { 0.5, -2.5 } },
-    },
-    secondary_draw_orders = { north = -1 },
-    always_draw_covers = true;
+    always_draw_covers = true,
   },
 }
+
 pipes_lib.add_pipes_simple(machine_name, machine_type, pipes_below, nill)
 replace(machine_name, machine_type, new_fluid_boxes)

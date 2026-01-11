@@ -5,7 +5,7 @@ local replace = replace_func.replace_fluid_boxes
 local machine_name = "se-fuel-refinery"
 local machine_type = "assembling-machine"
 local pipe_volume = 2000
-
+local pipe_output_multipler = 1/5
 
 local function replace_4way_graphics()
   local refinery = data.raw[machine_type][machine_name]
@@ -87,7 +87,7 @@ local new_fluid_boxes =
         production_type = "output",
         --pipe_picture = assembler3pipepictures(),
         pipe_covers = pipecoverspictures(),
-        volume = pipe_volume*2,
+        volume = pipe_volume*pipe_output_multipler,
         pipe_connections = {
             {flow_direction = "input-output", direction = defines.direction.east, position = { 2,  0} },
             {flow_direction = "input-output", direction = defines.direction.west, position = {-2,  0} },

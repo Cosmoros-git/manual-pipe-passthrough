@@ -5,7 +5,7 @@ local machine_name = "kr-atmospheric-condenser"
 local machine_name_2 = "se-space-biochemical-laboratory"
 
 local machine_type = "assembling-machine"
-local pipe_volume = 10000
+local pipe_volume = 200
 
 
 local new_fluid_boxes = {

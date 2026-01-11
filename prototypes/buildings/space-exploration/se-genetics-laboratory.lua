@@ -4,7 +4,7 @@ local replace = replace_func.replace_fluid_boxes
 local machine_name = "se-space-genetics-laboratory"
 local machine_type = "assembling-machine"
 local pipe_volume = 2000 
-
+local pipe_output_multipler = 1/5
 
 local new_fluid_boxes =
 {
@@ -29,7 +29,7 @@ local new_fluid_boxes =
       {
         production_type = "output",
         pipe_covers = pipecoverspictures(),
-        volume = pipe_volume,
+        volume = pipe_volume*pipe_output_multipler,
         pipe_connections = {
         { flow_direction="input-output", position = {-3, 0}, direction = defines.direction.west }},
         secondary_draw_orders = { north = -1 }
@@ -38,7 +38,7 @@ local new_fluid_boxes =
       {
         production_type = "output",
         pipe_covers = pipecoverspictures(),
-        volume = pipe_volume,
+        volume = pipe_volume*pipe_output_multipler,
         pipe_connections = {
         { flow_direction="input-output", position = {3, 0}, direction = defines.direction.east }
       },

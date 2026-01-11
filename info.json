@@ -1,12 +1,14 @@
 {
     "name": "manual-pipe-passthrough",
-    "version": "0.1.0",
+    "version": "0.1.4",
     "title": "Manual Assembler Pipe Passthrough",
     "author": "Cosmoros",
     "factorio_version": "2.0",
     "description": "Sometimes assembler-pipe-passthrough mod does a really poor-looking job. So I made this more-hands-on mod that allows me to fix those issues",
     "dependencies": [
         "base >= 2.0",
-        "(?) assembler-pipe-passthrough"
+        "(?) assembler-pipe-passthrough",
+        "(?) Krastorio2Assets",
+        "(?) space-exploration"
     ]
 }

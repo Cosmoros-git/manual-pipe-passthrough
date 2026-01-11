@@ -6,6 +6,7 @@ local machine_name = "chemical-plant"
 local machine_type = "assembling-machine"
 
 local pipe_volume = 500
+local pipe_output_multipler = 1/5
 
 local function replace_4way_animation()
   local refinery = data.raw[machine_type][machine_name]
@@ -85,7 +86,7 @@ local new_fluid_boxes =
   {
     production_type = "output",
     pipe_covers = pipecoverspictures(),
-    volume = pipe_volume,
+    volume = pipe_volume*pipe_output_multipler,
     pipe_connections = {
       { flow_direction="input-output", direction = defines.direction.north, position = {  0, -1 } }
     }
@@ -93,7 +94,7 @@ local new_fluid_boxes =
   {
     production_type = "output",
     pipe_covers = pipecoverspictures(),
-    volume = pipe_volume,
+    volume = pipe_volume*pipe_output_multipler,
     pipe_connections = {
       { flow_direction="input-output", direction = defines.direction.south, position = {  0,  1 } }
     }
@@ -121,7 +122,7 @@ local new_fluid_boxes =
   {
     production_type = "output",
     pipe_covers = pipecoverspictures(),
-    volume = pipe_volume,
+    volume = pipe_volume*pipe_output_multipler,
     pipe_connections = {
       { flow_direction="input-output", direction = defines.direction.east, position = {  1, 0 } }
     }
@@ -129,7 +130,7 @@ local new_fluid_boxes =
   {
     production_type = "output",
     pipe_covers = pipecoverspictures(),
-    volume = pipe_volume,
+    volume = pipe_volume*pipe_output_multipler,
     pipe_connections = {
       { flow_direction="input-output", direction = defines.direction.west, position = { -1, 0 } }
     }

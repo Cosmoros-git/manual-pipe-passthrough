@@ -10,7 +10,7 @@ local machine_names = {
 
 local machine_type = "assembling-machine"
 local pipe_volume = 1000
-
+local pipe_output_multipler = 1/5
 
 
 local function pipe_above(x)
@@ -107,7 +107,7 @@ local new_fluid_boxes = {
       {
           production_type = "output",
           pipe_covers = pipecoverspictures(),
-          volume = pipe_volume,
+          volume = pipe_volume*pipe_output_multipler,
           pipe_connections = {
             { flow_direction="input-output", position = {-4, 0}, direction = defines.direction.west },
             { flow_direction="input-output", position = {4, 0}, direction = defines.direction.east },
@@ -117,7 +117,7 @@ local new_fluid_boxes = {
         {
           production_type = "output",
           pipe_covers = pipecoverspictures(),
-          volume = pipe_volume,
+          volume = pipe_volume*pipe_output_multipler,
           pipe_connections = {
             { flow_direction="input-output", position = {-4, 1}, direction = defines.direction.west },
             { flow_direction="input-output", position = {4, 1}, direction = defines.direction.east },
@@ -127,7 +127,7 @@ local new_fluid_boxes = {
         {
           production_type = "output",
           pipe_covers = pipecoverspictures(),
-          volume = pipe_volume,
+          volume = pipe_volume*pipe_output_multipler,
           pipe_connections = {
             { flow_direction="input-output", position = {-4, -1}, direction = defines.direction.west },
             { flow_direction="input-output", position = {4, -1}, direction = defines.direction.east },

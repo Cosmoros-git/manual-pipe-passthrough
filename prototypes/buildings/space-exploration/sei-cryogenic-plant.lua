@@ -5,15 +5,17 @@ local replace = replace_func.replace_fluid_boxes
 local machine_name = "cryogenic-plant"
 local machine_type = "assembling-machine"
 
-local pipe_volume = 2000
+local pipe_volume = 1000
+local pipe_output_multipler = 1/5
+
+
+
 
 
 local pipe_width = 380
 local pipe_hight = 396
 local frames = 1
 local repeated = 192
-
-
 local function pipe_above()
   return {
     filename = "__manual-pipe-passthrough__/graphics/buildings/space-age/cryogenic-plant/pipes-above.png",
@@ -108,7 +110,7 @@ local new_fluid_boxes =
     production_type = "output",
     pipe_covers = pipecoverspictures(),
     always_draw_covers = true,
-    volume = pipe_volume,
+    volume = pipe_volume*pipe_output_multipler,
     pipe_connections = {
         { flow_direction="input-output", direction = defines.direction.north, position = {  0, -2 } },
         { flow_direction="input-output", direction = defines.direction.south, position = {  0,  2 } }
@@ -135,7 +137,7 @@ local new_fluid_boxes =
     {
     production_type = "input",
     pipe_covers = pipecoverspictures(),
-    volume = 200,
+    volume = pipe_volume,
     always_draw_covers = true,
     pipe_connections = {
         { flow_direction="input-output", direction = defines.direction.north, position = {  2, -2 } },
@@ -144,7 +146,7 @@ local new_fluid_boxes =
     {
     production_type = "input",
     pipe_covers = pipecoverspictures(),
-    volume = 200,
+    volume = pipe_volume,
     always_draw_covers = true,
     pipe_connections = {
         { flow_direction="input-output", direction = defines.direction.south, position = {  2,  2 } },
@@ -152,7 +154,7 @@ local new_fluid_boxes =
     },
     {
     production_type = "output",
-    volume = 200,
+    volume = pipe_volume*pipe_output_multipler,
     always_draw_covers = true,
     pipe_covers = pipecoverspictures(),
     pipe_connections = {
@@ -161,7 +163,7 @@ local new_fluid_boxes =
     },
     {
     production_type = "output",
-    volume = 200,
+    volume = pipe_volume*pipe_output_multipler,
     always_draw_covers = true,
     pipe_covers = pipecoverspictures(),
     pipe_connections = {

@@ -4,7 +4,9 @@ local pipes_lib = require("lib.add-pipes-simple")
 
 local machine_name = "se-space-manufactory"
 local machine_type = "assembling-machine"
-local pipe_volume = 2000
+local pipe_volume = 1000
+local pipe_output_multipler = 1/5
+
 
 local pipes_above = {
           filename = "__manual-pipe-passthrough__/graphics/buildings/space-exploration/se-space-manufactory/pipes-above.png",
@@ -67,7 +69,7 @@ local new_fluid_boxes =
     {
     production_type = "output",
     pipe_covers = pipecoverspictures(),
-    volume = pipe_volume,
+    volume = pipe_volume*pipe_output_multipler,
     pipe_connections = {
         { flow_direction = "input-output", position = {0, 4}, direction = defines.direction.south },
         { flow_direction = "input-output", position = {0, -4}, direction = defines.direction.north }
@@ -77,7 +79,7 @@ local new_fluid_boxes =
     {
     production_type = "output",
     pipe_covers = pipecoverspictures(),
-    volume = pipe_volume,
+    volume = pipe_volume*pipe_output_multipler,
     pipe_connections = {
         { flow_direction = "input-output", position = {2, 4}, direction = defines.direction.south },
         { flow_direction = "input-output", position = {2, -4}, direction = defines.direction.north }
@@ -87,7 +89,7 @@ local new_fluid_boxes =
     {
     production_type = "output",
     pipe_covers = pipecoverspictures(),
-    volume = pipe_volume,
+    volume = pipe_volume*pipe_output_multipler,
     pipe_connections = {
         { flow_direction = "input-output", position = {-2, 4}, direction = defines.direction.south },
         { flow_direction = "input-output", position = {-2, -4}, direction = defines.direction.north }

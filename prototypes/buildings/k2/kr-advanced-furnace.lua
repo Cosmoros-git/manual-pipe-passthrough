@@ -4,7 +4,8 @@ local replace = replace_func.replace_fluid_boxes
 
 local machine_name = "kr-advanced-furnace"
 local machine_type = "assembling-machine"
-local pipe_volume = 3000
+local pipe_volume = 1000
+local pipe_output_multipler = 1/5
 
 local new_fluid_boxes =
 {
@@ -13,9 +14,17 @@ local new_fluid_boxes =
         pipe_picture = pipe_pictures.a,
         pipe_covers = pipecoverspictures(),
         volume = pipe_volume,
-        pipe_connections = { 
-        { flow_direction = "input-output", direction = defines.direction.north, position = { -1, -3 } },
+        pipe_connections = {
         { flow_direction = "input-output", direction = defines.direction.east, position = { 3, -1 } }  },
+        secondary_draw_orders = { north = -1 },
+      },
+      {
+        production_type = "input",
+        pipe_picture = pipe_pictures.a,
+        pipe_covers = pipecoverspictures(),
+        volume = pipe_volume,
+        pipe_connections = { 
+        { flow_direction = "input-output", direction = defines.direction.north, position = { -1, -3 } }},
         secondary_draw_orders = { north = -1 },
       },
       {
@@ -32,9 +41,17 @@ local new_fluid_boxes =
         production_type = "output",
         pipe_picture = pipe_pictures.b,
         pipe_covers = pipecoverspictures(),
-        volume = pipe_volume,
+        volume = pipe_volume*pipe_output_multipler,
         pipe_connections = { 
-        { flow_direction = "input-output", direction = defines.direction.south, position = { -1, 3 } },
+        { flow_direction = "input-output", direction = defines.direction.south, position = { -1, 3 } } },
+        secondary_draw_orders = { north = -1 },
+      },
+      {
+        production_type = "output",
+        pipe_picture = pipe_pictures.b,
+        pipe_covers = pipecoverspictures(),
+        volume = pipe_volume*pipe_output_multipler,
+        pipe_connections = {
         { flow_direction = "input-output", direction = defines.direction.east, position = { 3, 1 } } },
         secondary_draw_orders = { north = -1 },
       },
@@ -42,7 +59,7 @@ local new_fluid_boxes =
         production_type = "output",
         pipe_picture = pipe_pictures.a,
         pipe_covers = pipecoverspictures(),
-        volume = pipe_volume,
+        volume = pipe_volume*pipe_output_multipler,
         pipe_connections = { 
         { flow_direction = "input-output", direction = defines.direction.south, position = { 1, 3 } },
         { flow_direction = "input-output", direction = defines.direction.west, position = { -3, 1 } } },
