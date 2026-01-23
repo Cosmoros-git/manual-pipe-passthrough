@@ -1,11 +1,16 @@
+-- Helper functions
+local fbh = require("lib.fluid-box-helper")
 local replace_func = require("lib.replace-fluidbox")
 local replace = replace_func.replace_fluid_boxes
 local pipes_lib = require("lib.add-pipes-simple")
 
+-- Machine type and name. Can have many names.
 local machine_name = "se-space-manufactory"
 local machine_type = "assembling-machine"
+
+-- Pipe volume and output multiplier. Smaller output pipes output liquids much faster.
 local pipe_volume = 1000
-local pipe_output_multipler = 1/5
+local pipe_output_multiplier = 1/5
 
 
 local pipes_above = {
@@ -34,69 +39,53 @@ local pipes_below = {
             scale = 0.5,
 }
 
-local new_fluid_boxes =
-{
+local pipe_positions_input = {
+    -- Input box 1: west at (-4, 0) and east at (4, 0)
     {
-    production_type = "input",
-    pipe_covers = pipecoverspictures(),
-    volume = pipe_volume,
-    pipe_connections = {
-        { flow_direction = "input-output", position = {-4, 0}, direction = defines.direction.west },
-        { flow_direction = "input-output", position = {4, 0}, direction = defines.direction.east }
+        { -4, 0 },  -- Left center connection (west-facing)
+        {  4, 0 }   -- Right center connection (east-facing)
     },
-    secondary_draw_orders = { north = -1 }
-    },
-     {
-    production_type = "input",
-    pipe_covers = pipecoverspictures(),
-    volume = pipe_volume,
-    pipe_connections = {
-          { flow_direction = "input-output", position = {-4, 2}, direction = defines.direction.west },
-        { flow_direction = "input-output", position = {4, 2}, direction = defines.direction.east }
-    },
-    secondary_draw_orders = { north = -1 }
-    },
-     {
-    production_type = "input",
-    pipe_covers = pipecoverspictures(),
-    volume = pipe_volume,
-    pipe_connections = {
-          { flow_direction = "input-output", position = {-4, -2}, direction = defines.direction.west },
-        { flow_direction = "input-output", position = {4, -2}, direction = defines.direction.east }
-    },
-    secondary_draw_orders = { north = -1 }
-    },
+    -- Input box 2: west at (-4, 2) and east at (4, 2)
     {
-    production_type = "output",
-    pipe_covers = pipecoverspictures(),
-    volume = pipe_volume*pipe_output_multipler,
-    pipe_connections = {
-        { flow_direction = "input-output", position = {0, 4}, direction = defines.direction.south },
-        { flow_direction = "input-output", position = {0, -4}, direction = defines.direction.north }
+        { -4, 2 },  -- Left top connection (west-facing)
+        {  4, 2 }   -- Right top connection (east-facing)
     },
-    secondary_draw_orders = { north = -1 }
-    },
+    -- Input box 3: west at (-4, -2) and east at (4, -2)
     {
-    production_type = "output",
-    pipe_covers = pipecoverspictures(),
-    volume = pipe_volume*pipe_output_multipler,
-    pipe_connections = {
-        { flow_direction = "input-output", position = {2, 4}, direction = defines.direction.south },
-        { flow_direction = "input-output", position = {2, -4}, direction = defines.direction.north }
-    },
-    secondary_draw_orders = { north = -1 }
-    },
-    {
-    production_type = "output",
-    pipe_covers = pipecoverspictures(),
-    volume = pipe_volume*pipe_output_multipler,
-    pipe_connections = {
-        { flow_direction = "input-output", position = {-2, 4}, direction = defines.direction.south },
-        { flow_direction = "input-output", position = {-2, -4}, direction = defines.direction.north }
-    },
-    secondary_draw_orders = { north = -1 }
-    },
+        { -4, -2 },  -- Left bottom connection (west-facing)
+        {  4, -2 }   -- Right bottom connection (east-facing)
+    }
 }
 
+local pipe_positions_output = {
+    -- Output box 1: south at (0, 4) and north at (0, -4) - reduced volume
+    {
+        { 0,  4 },  -- Bottom center connection (south-facing)
+        { 0, -4 }   -- Top center connection (north-facing)
+    },
+    -- Output box 2: south at (2, 4) and north at (2, -4) - reduced volume
+    {
+        { 2,  4 },  -- Bottom right connection (south-facing)
+        { 2, -4 }   -- Top right connection (north-facing)
+    },
+    -- Output box 3: south at (-2, 4) and north at (-2, -4) - reduced volume
+    {
+        { -2,  4 },  -- Bottom left connection (south-facing)
+        { -2, -4 }   -- Top left connection (north-facing)
+    }
+}
+
+local pipe_args = {
+    volume = pipe_volume,
+    output_multiplier = pipe_output_multiplier,
+    
+    pipe_positions_input = pipe_positions_input,
+    pipe_positions_output = pipe_positions_output,
+    
+    pipecoverspictures = pipecoverspictures(),
+    secondary_draw_orders = { north = -1 },
+}
+
+local new_fluid_boxes = fbh.make_pipes(pipe_args)
 pipes_lib.add_pipes_simple(machine_name, machine_type, pipes_below, pipes_above)
-replace(machine_name, machine_type, new_fluid_boxes)
+replace(machine_name,machine_type,new_fluid_boxes)

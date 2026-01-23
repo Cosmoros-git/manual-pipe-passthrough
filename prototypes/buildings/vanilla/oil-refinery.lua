@@ -1,12 +1,16 @@
+-- Helper functions
+local fbh = require("lib.fluid-box-helper")
 local replace_func = require("lib.replace-fluidbox")
 local logger = require("lib.logger")
 local replace = replace_func.replace_fluid_boxes
 
+-- Machine type and name. Can have many names.
 local machine_name = "oil-refinery"
 local machine_type = "assembling-machine"
 
+-- Pipe volume and output multiplier. Smaller output pipes output liquids much faster.
 local pipe_volume = 1000
-local pipe_output_multipler = 1/5
+local pipe_output_multiplier = 1/5
 
 
 
@@ -46,148 +50,107 @@ local function replace_oil_refinery_graphics(file_name)
 end
 replace_oil_refinery_graphics()
 
-local vanilla_style =
-{
-        -- Input Box A
+-- Vanilla style pipe positions
+local vanilla_style_pipe_positions_input = {
+    -- Input Box A: south at (-1, 2) and north at (-2, -2)
     {
-        production_type = "input",
-        pipe_covers = pipecoverspictures(),
-        volume = pipe_volume,
-        pipe_connections =
-        {
-            {flow_direction = "input-output",  direction = defines.direction.south, position = {-1,  2} },
-            {flow_direction = "input-output",  direction = defines.direction.north, position = {-2, -2} },
-        }
+        { -1,  2 },  -- Bottom-left connection (south-facing)
+        { -2, -2 }   -- Top-left connection (north-facing)
     },
-        -- Input Box B
+    -- Input Box B: south at (1, 2), north at (0, -2), and north at (2, -2)
     {
-        production_type = "input",
-        pipe_covers = pipecoverspictures(),
-        volume = pipe_volume,
-        pipe_connections =
-        {
-            {flow_direction = "input-output",  direction = defines.direction.south, position = { 1,  2} },
-            {flow_direction = "input-output",  direction = defines.direction.north, position = { 0, -2} },
-            {flow_direction = "input-output",  direction = defines.direction.north, position = { 2, -2} },
-        }
-    },
-    -- Output Box A
-    -- Output Box A (middle)
-    {
-        production_type = "output",
-        --pipe_picture = assembler3pipepictures(),
-        pipe_covers = pipecoverspictures(),
-        volume = pipe_volume*pipe_output_multipler,
-        pipe_connections = {
-            { direction = defines.direction.east, position = { 2,  0} },
-            { direction = defines.direction.west, position = {-2,  0} },
-        }
-    },
-
-    -- Output Box B (top)
-    {
-        production_type = "output",
-        --pipe_picture = assembler3pipepictures(),
-        pipe_covers = pipecoverspictures(),
-        volume = pipe_volume*pipe_output_multipler,
-        pipe_connections = {
-            { direction = defines.direction.east, position = { 2, -1} },
-            { direction = defines.direction.west, position = {-2, -1} },
-        }
-    },
-
-    -- Output Box C (bottom)
-    {
-        production_type = "output",
-        --pipe_picture = assembler3pipepictures(),
-        pipe_covers = pipecoverspictures(),
-        volume = pipe_volume*pipe_output_multipler,
-        pipe_connections = {
-            { direction = defines.direction.east, position = { 2,  1} },
-            { direction = defines.direction.west, position = {-2,  1} },
-        }
+        {  1,  2 },  -- Bottom-right connection (south-facing)
+        {  0, -2 },  -- Top-center connection (north-facing)
+        {  2, -2 }   -- Top-right connection (north-facing)
     }
 }
 
-local simple_style =
-{
-        -- Input Box A
+local vanilla_style_pipe_positions_output = {
+    -- Output Box A (middle): east at (2, 0) and west at (-2, 0)
     {
-        production_type = "input",
-        pipe_covers = pipecoverspictures(),
-        volume = pipe_volume,
-        pipe_connections =
-        {
-            {flow_direction = "input-output",  direction = defines.direction.south, position = {-2,  2} },
-            {flow_direction = "input-output",  direction = defines.direction.north, position = {-2, -2} },
-        }
+        {  2,  0 },  -- Right-center connection (east-facing)
+        { -2,  0 }   -- Left-center connection (west-facing)
     },
-        -- Input Box B
+    -- Output Box B (top): east at (2, -1) and west at (-2, -1)
     {
-        production_type = "input",
-        pipe_covers = pipecoverspictures(),
-        volume = pipe_volume,
-        pipe_connections =
-        {
-            {flow_direction = "input-output",  direction = defines.direction.south, position = { 0,  2} },
-            {flow_direction = "input-output",  direction = defines.direction.north, position = { 0, -2} }
-        }
+        {  2, -1 },  -- Right-top connection (east-facing)
+        { -2, -1 }   -- Left-top connection (west-facing)
     },
+    -- Output Box C (bottom): east at (2, 1) and west at (-2, 1)
     {
-        production_type = "input",
-        pipe_covers = pipecoverspictures(),
-        volume = pipe_volume,
-        pipe_connections =
-        {
-            {flow_direction = "input-output",  direction = defines.direction.south, position = { 2,  2} },
-            {flow_direction = "input-output",  direction = defines.direction.north, position = { 2, -2} },
-        }
-    },
-    -- Output Box A
-    -- Output Box A (middle)
-    {
-        production_type = "output",
-        --pipe_picture = assembler3pipepictures(),
-        pipe_covers = pipecoverspictures(),
-        volume = pipe_volume*pipe_output_multipler,
-        pipe_connections = {
-            { direction = defines.direction.east, position = { 2,  0} },
-            { direction = defines.direction.west, position = {-2,  0} },
-        }
-    },
-
-    -- Output Box B (top)
-    {
-        production_type = "output",
-        --pipe_picture = assembler3pipepictures(),
-        pipe_covers = pipecoverspictures(),
-        volume = pipe_volume*pipe_output_multipler,
-        pipe_connections = {
-            { direction = defines.direction.east, position = { 2, -1} },
-            { direction = defines.direction.west, position = {-2, -1} },
-        }
-    },
-
-    -- Output Box C (bottom)
-    {
-        production_type = "output",
-        --pipe_picture = assembler3pipepictures(),
-        pipe_covers = pipecoverspictures(),
-        volume = pipe_volume*pipe_output_multipler,
-        pipe_connections = {
-            { direction = defines.direction.east, position = { 2,  1} },
-            { direction = defines.direction.west, position = {-2,  1} },
-        }
+        {  2,  1 },  -- Right-bottom connection (east-facing)
+        { -2,  1 }   -- Left-bottom connection (west-facing)
     }
 }
 
-if settings.startup["vanilla-oil-refinery-alt-skin"].value then
-    local file_name = "__manual-pipe-passthrough__/graphics/buildings/vanilla/oil-refinery/oil-refinery-alt.png"
-    replace_oil_refinery_graphics(file_name)
-    replace(machine_name, machine_type, simple_style)
-else
-    local file_name = "__manual-pipe-passthrough__/graphics/buildings/vanilla/oil-refinery/oil-refinery-1.png"
-    replace_oil_refinery_graphics(file_name)
-    replace(machine_name, machine_type, vanilla_style)
-end 
+local vanilla_style_pipe_args = {
+    volume = pipe_volume,
+    output_multiplier = pipe_output_multiplier,
 
+    pipe_positions_input = vanilla_style_pipe_positions_input,
+    pipe_positions_output = vanilla_style_pipe_positions_output,
+
+    pipecoverspictures = pipecoverspictures(),
+    secondary_draw_orders = { north = -1 },
+}
+
+-- Simple style pipe positions
+local simple_style_pipe_positions_input = {
+    -- Input Box A: south at (-2, 2) and north at (-2, -2)
+    {
+        { -2,  2 },  -- Bottom-left connection (south-facing)
+        { -2, -2 }   -- Top-left connection (north-facing)
+    },
+    -- Input Box B: south at (0, 2) and north at (0, -2)
+    {
+        {  0,  2 },  -- Bottom-center connection (south-facing)
+        {  0, -2 }   -- Top-center connection (north-facing)
+    },
+    -- Input Box C: south at (2, 2) and north at (2, -2)
+    {
+        {  2,  2 },  -- Bottom-right connection (south-facing)
+        {  2, -2 }   -- Top-right connection (north-facing)
+    }
+}
+
+local simple_style_pipe_positions_output = {
+    -- Output Box A (middle): east at (2, 0) and west at (-2, 0)
+    {
+        {  2,  0 },  -- Right-center connection (east-facing)
+        { -2,  0 }   -- Left-center connection (west-facing)
+    },
+    -- Output Box B (top): east at (2, -1) and west at (-2, -1)
+    {
+        {  2, -1 },  -- Right-top connection (east-facing)
+        { -2, -1 }   -- Left-top connection (west-facing)
+    },
+    -- Output Box C (bottom): east at (2, 1) and west at (-2, 1)
+    {
+        {  2,  1 },  -- Right-bottom connection (east-facing)
+        { -2,  1 }   -- Left-bottom connection (west-facing)
+    }
+}
+
+local simple_style_pipe_args = {
+    volume = pipe_volume,
+    output_multiplier = pipe_output_multiplier,
+
+    pipe_positions_input = simple_style_pipe_positions_input,
+    pipe_positions_output = simple_style_pipe_positions_output,
+
+    pipecoverspictures = pipecoverspictures(),
+    secondary_draw_orders = { north = -1 },
+}
+
+local alt_skin = settings.startup["vanilla-oil-refinery-alt-skin"].value
+
+local file_name = alt_skin
+    and "__manual-pipe-passthrough__/graphics/buildings/vanilla/oil-refinery/oil-refinery-alt.png"
+    or "__manual-pipe-passthrough__/graphics/buildings/vanilla/oil-refinery/oil-refinery-1.png"
+
+local new_fluid_boxes = alt_skin
+    and fbh.make_pipes(simple_style_pipe_args)
+    or fbh.make_pipes(vanilla_style_pipe_args)
+
+replace_oil_refinery_graphics(file_name)
+replace(machine_name, machine_type, new_fluid_boxes)

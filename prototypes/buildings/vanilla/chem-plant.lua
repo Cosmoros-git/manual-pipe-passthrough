@@ -1,10 +1,14 @@
+-- Helper functions
+local fbh = require("lib.fluid-box-helper")
 local replace_func = require("lib.replace-fluidbox")
 local logger = require("lib.logger")
 local replace = replace_func.replace_fluid_boxes
 
+-- Machine type and name. Can have many names.
 local machine_name = "chemical-plant"
 local machine_type = "assembling-machine"
 
+-- Pipe volume and output multiplier. Smaller output pipes output liquids much faster.
 local pipe_volume = 500
 local pipe_output_multipler = 1/5
 
@@ -62,80 +66,34 @@ local function replace_4way_animation()
 end
 replace_4way_animation()
 
-local new_fluid_boxes =
-{
-  -- 1) North input  ↔  South input   (left)
-  {
-    production_type = "input",
-    pipe_covers = pipecoverspictures(),
-    volume = pipe_volume,
-    pipe_connections = {
-      { flow_direction="input-output", direction = defines.direction.north, position = { -1, -1 } }
-    }
-  },
-  {
-    production_type = "input",
-    pipe_covers = pipecoverspictures(),
-    volume = pipe_volume,
-    pipe_connections = {
-      { flow_direction="input-output", direction = defines.direction.south, position = { -1,  1 } }
-    }
-  },
-
-  -- 2) North output ↔ South output   (center)
-  {
-    production_type = "output",
-    pipe_covers = pipecoverspictures(),
-    volume = pipe_volume*pipe_output_multipler,
-    pipe_connections = {
-      { flow_direction="input-output", direction = defines.direction.north, position = {  0, -1 } }
-    }
-  },
-  {
-    production_type = "output",
-    pipe_covers = pipecoverspictures(),
-    volume = pipe_volume*pipe_output_multipler,
-    pipe_connections = {
-      { flow_direction="input-output", direction = defines.direction.south, position = {  0,  1 } }
-    }
-  },
-
-  -- 3) North input ↔ South input   (right)
-  {
-    production_type = "input",
-    pipe_covers = pipecoverspictures(),
-    volume = pipe_volume,
-    pipe_connections = {
-      { flow_direction="input-output", direction = defines.direction.north, position = {  1, -1 } }
-    }
-  },
-  {
-    production_type = "input",
-    pipe_covers = pipecoverspictures(),
-    volume = pipe_volume,
-    pipe_connections = {
-      { flow_direction="input-output", direction = defines.direction.south, position = {  1,  1 } }
-    }
-  },
-
-  -- 4) East output ↔ West output  (top)
-  {
-    production_type = "output",
-    pipe_covers = pipecoverspictures(),
-    volume = pipe_volume*pipe_output_multipler,
-    pipe_connections = {
-      { flow_direction="input-output", direction = defines.direction.east, position = {  1, 0 } }
-    }
-  },
-  {
-    production_type = "output",
-    pipe_covers = pipecoverspictures(),
-    volume = pipe_volume*pipe_output_multipler,
-    pipe_connections = {
-      { flow_direction="input-output", direction = defines.direction.west, position = { -1, 0 } }
-    }
-  },
+local pipe_positions_input = {
+    -- Left column inputs
+    { -1, -1 },  -- Top-left input (north-facing)
+    { -1,  1 },  -- Bottom-left input (south-facing)
+    -- Right column inputs
+    {  1, -1 },  -- Top-right input (north-facing)
+    {  1,  1 }   -- Bottom-right input (south-facing)
 }
 
+local pipe_positions_output = {
+    -- Center column outputs - reduced volume
+    {  0, -1 },  -- Top-center output (north-facing) - reduced volume
+    {  0,  1 },  -- Bottom-center output (south-facing) - reduced volume
+    -- Horizontal outputs - reduced volume
+    {  1,  0 },  -- Right-center output (east-facing) - reduced volume
+    { -1,  0 }   -- Left-center output (west-facing) - reduced volume
+}
 
+local pipe_args = {
+    volume = pipe_volume,
+    output_multiplier = pipe_output_multiplier,
+    
+    pipe_positions_input = pipe_positions_input,
+    pipe_positions_output = pipe_positions_output,
+    
+    pipecoverspictures = pipecoverspictures(),
+    secondary_draw_orders = { north = -1 },
+}
+
+local new_fluid_boxes = fbh.make_pipes(pipe_args)
 replace(machine_name, machine_type, new_fluid_boxes)

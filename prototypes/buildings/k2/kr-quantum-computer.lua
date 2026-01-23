@@ -1,12 +1,18 @@
+-- Helper functions
+local fbh = require("lib.fluid-box-helper")
 local replace_func = require("lib.replace-fluidbox")
 local replace = replace_func.replace_fluid_boxes
 local pipes_lib = require("lib.add-pipes-simple")
 
+-- Machine type and name. Can have many names.
 local machine_name = "kr-quantum-computer"
 local machine_type = "assembling-machine"
-local pipe_volume = 500
-local pipe_output_multipler = 1/5
 
+-- Pipe volume and output multiplier. Smaller output pipes output liquids much faster.
+local pipe_volume = 500
+local pipe_output_multiplier = 1/5
+
+-- Graphics for pipes.
 local pipes_above = {
     filename = "__manual-pipe-passthrough__/graphics/buildings/kr/kr-quantum-computer/pipes-above.png",
     priority = "high",
@@ -17,7 +23,6 @@ local pipes_above = {
     repeat_count = 48,
     scale = 0.5,
 } -- Ended unused
-
 local pipes_below = {
     filename = "__manual-pipe-passthrough__/graphics/buildings/kr/kr-quantum-computer/pipes-below.png",
     priority = "high",
@@ -36,7 +41,47 @@ local entity = data.raw[machine_type] and data.raw[machine_type][machine_name]
   else
 end
 
-local new_fluid_boxes =
+local pipe_positions_input = {
+    -- First input box: west at (-2.5, -0.5) and east at (2.5, -0.5)
+    {
+        { -2.5, -0.5 },  -- Left connection (west-facing)
+        {  2.5, -0.5 }   -- Right connection (east-facing)
+    },
+    -- Second input box: west at (-2.5, 0.5) and east at (2.5, 0.5)
+    {
+        { -2.5,  0.5 },  -- Left connection (west-facing)
+        {  2.5,  0.5 }   -- Right connection (east-facing)
+    }
+}
+
+local pipe_positions_output = {
+    -- First output box: north at (-0.5, -2.5) and south at (-0.5, 2.5)
+    {
+        { -0.5, -2.5 },  -- Top connection (north-facing)
+        { -0.5,  2.5 }   -- Bottom connection (south-facing)
+    },
+    -- Second output box: north at (0.5, -2.5) and south at (0.5, 2.5)
+    {
+        {  0.5, -2.5 },  -- Top connection (north-facing)
+        {  0.5,  2.5 }   -- Bottom connection (south-facing)
+    }
+}
+
+local pipe_args = {
+    volume = pipe_volume,
+    output_multiplier = pipe_output_multiplier,
+
+    pipe_positions_input = pipe_positions_input,
+    pipe_positions_output = pipe_positions_output,
+
+    pipecoverspictures = pipecoverspictures(),
+    secondary_draw_orders = { north = -1 },
+    always_draw_covers = true
+}
+local new_fluid_boxes = fbh.make_pipes(pipe_args)
+
+-- Leaving just incase I screw up.
+local old_fluid_boxes =
 {
   {
     production_type = "input",
@@ -63,7 +108,7 @@ local new_fluid_boxes =
   {
     production_type = "output",
     pipe_covers = pipecoverspictures(),
-    volume = pipe_volume * pipe_output_multipler,
+    volume = pipe_volume * pipe_output_multiplier,
     pipe_connections = {
       { flow_direction = "input-output", direction = defines.direction.north, position = { -0.5, -2.5 }, primary = true },
       { flow_direction = "input-output", direction = defines.direction.south, position = { -0.5,  2.5 } },
@@ -74,7 +119,7 @@ local new_fluid_boxes =
   {
     production_type = "output",
     pipe_covers = pipecoverspictures(),
-    volume = pipe_volume * pipe_output_multipler,
+    volume = pipe_volume * pipe_output_multiplier,
     pipe_connections = {
       { flow_direction = "input-output", direction = defines.direction.north, position = {  0.5, -2.5 }, primary = true },
       { flow_direction = "input-output", direction = defines.direction.south, position = {  0.5,  2.5 } },
@@ -84,5 +129,5 @@ local new_fluid_boxes =
   },
 }
 
-pipes_lib.add_pipes_simple(machine_name, machine_type, pipes_below, nill)
+pipes_lib.add_pipes_simple(machine_name, machine_type, pipes_below, nil)
 replace(machine_name, machine_type, new_fluid_boxes)

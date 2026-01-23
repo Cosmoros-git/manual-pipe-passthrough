@@ -1,43 +1,48 @@
-
+---------------------------------------------------------------------------------------------------
+Version: 0.1.5
+Date: 2026-01-20
+  Bugfixes:
+    - Fixed k2so crash because of different pipe_pictures mod references.
+    - Fixed a few possible bugs that did not happen but could have.
+    - Fixed changelog. Yep. It was broken.
+  Changes:
+    - Major code rewrite for easier future upgrades and easier implementation for others.
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.4
 Date: 2026-01-11
-    - Improvements:
-	- Made an alternative skin for the oil refinery that has more direct fluid_boxes. 
-	- Ended up liking its look more. Taggable in settings. Onn by default.
-
-	- Re-upload, due to colour correction getting out of scope.
-
+  Features:
+    - Made an alternative skin for the oil refinery that has more direct fluid_boxes.
+  Changes:
+    - Ended up liking its look more. Taggable in settings. On by default.
+  Bugfixes:
+    - Re-upload, due to colour correction getting out of scope.
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.3
 Date: 2026-01-11
-    - Fixes:
-	- With ATOM installed, core fragment processing is now possible.
-	- kr-quantum-computer's fluid inputs are now aligned.
-	- Growth Facility's output can now be chained together when doing methane to crude oil.
-	- Mechanical Facility, when making Biomechanical Data, is now aligned.
-
-
-
+  Bugfixes:
+    - With ATOM installed, core fragment processing is now possible.
+    - kr-quantum-computer's fluid inputs are now aligned.
+    - Growth Facility's output can now be chained together when doing methane to crude oil.
+    - Mechanical Facility, when making Biomechanical Data, is now aligned.
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.2
 Date: 2026-01-11
-    - Fixes:
-	- Changed fluid_box volumes. Had them quite too high for normal games.
-	- Also, it seems I uploaded an older version of the mod previously on accident.
-
-
-
+  Bugfixes:
+    - Changed fluid_box volumes. Had them quite too high for normal games.
+  Changes:
+    - Uploaded an older version of the mod previously on accident.
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.1
 Date: 2026-01-10
-    - Fixes:
-	- Fixed changelog
-	- Fixed incorrectly facing fluid-input on kr-advanced-chemical-plant
-	- Uploaded the wrong version and screwed stuff up.
-
-
+  Bugfixes:
+    - Fixed changelog.
+    - Fixed incorrectly facing fluid-input on kr-advanced-chemical-plant.
+  Changes:
+    - Uploaded the wrong version and screwed stuff up.
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.0
 Date: 2026-01-10
-    - Release. This is currently a WIP mod. I'm still working on adding more fixes to machines. 
+  Major Features:
+    - Initial release.
+  Changes:
+    - This is currently a WIP mod. I'm still working on adding more fixes to machines.
