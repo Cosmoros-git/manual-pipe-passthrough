@@ -5,13 +5,13 @@ local replace_func = require("lib.replace-fluidbox")
 local logger = require("lib.logger")
 local replace = replace_func.replace_fluid_boxes
 
--- Machine type and name. Can be many names
+-- Machine type and name. Can have many names
 local machine_name = "kr-fuel-refinery"
 local machine_type = "assembling-machine"
 
 -- Pipe volume and output multiplier. Smaller output pipes output liquids much faster.
 local pipe_volume = 1000
-local pipe_output_multipler = 1/5
+local pipe_output_multiplier = 1/5
 
 -- Function that I used to edit sprites without license issues.
 local function replace_4way_graphics()

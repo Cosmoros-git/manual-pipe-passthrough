@@ -18,8 +18,8 @@ local pipe_positions_input = {
 }
 
 local pipe_positions_output = {
-    { -2, 0 },  -- Left output (west-facing) - reduced volume
-    {  2, 0 }   -- Right output (east-facing) - reduced volume
+    { -2, 0 },  -- Left output (west-facing) 
+    {  2, 0 }   -- Right output (east-facing) 
 }
 
 local pipe_args = {
@@ -32,4 +32,6 @@ local pipe_args = {
     pipecoverspictures = pipecoverspictures(),
     secondary_draw_orders = { north = -1 },
 }
+
+local new_fluid_boxes = fbh.make_pipes(pipe_args)
 replace(machine_name, machine_type, new_fluid_boxes)

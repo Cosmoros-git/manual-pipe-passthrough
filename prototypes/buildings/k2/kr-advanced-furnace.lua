@@ -34,6 +34,25 @@ local common_pipe_args_output = {
         output_multiplier = pipe_output_multiplier,
 }
 
+-- I am way too tired rn to search into utils
+local function merge(a, b)
+    local result = {}
+
+    if a then
+        for k, v in pairs(a) do
+            result[k] = v
+        end
+    end
+
+    if b then
+        for k, v in pairs(b) do
+            result[k] = v
+        end
+    end
+
+    return result
+end
+
 local function input_pipe(args)
     return fbh.make_pipe(merge(common_pipe_args_input,args))
 end
@@ -47,19 +66,19 @@ local new_fluid_boxes = {
     
     -- First input: right side, slightly above center
     input_pipe{
-        pipe_pictures = pipe_pictures.a,  -- Uses pipe picture set 'a'
+        pipe_pictures = pipe_pictures.a,
         position      = {  3, -1 },       -- Right, above center connection (east-facing)
     },
 
     -- Second input: left side, top
     input_pipe{
-        pipe_pictures = pipe_pictures.a,  -- Uses pipe picture set 'a'
+        pipe_pictures = pipe_pictures.a,
         position      = { -1, -3 },       -- Left, top connection (north-facing)
     },
 
     -- Third input: dual-connection box
     input_pipe{
-        pipe_pictures = pipe_pictures.b,  -- Uses pipe picture set 'b'
+        pipe_pictures = pipe_pictures.b, 
         position = {
             {  1, -3 },  -- Right, top connection (north-facing)
             { -3, -1 },  -- Left, above center connection (west-facing)
@@ -70,19 +89,19 @@ local new_fluid_boxes = {
     
     -- First output: left side, bottom
     output_pipe{
-        pipe_pictures = pipe_pictures.b,  -- Uses pipe picture set 'b'
+        pipe_pictures = pipe_pictures.b,
         position      = { -1,  3 },       -- Left, bottom connection (south-facing)
     },
 
     -- Second output: right side, slightly below center
     output_pipe{
-        pipe_pictures = pipe_pictures.b,  -- Uses pipe picture set 'b'
+        pipe_pictures = pipe_pictures.b,
         position      = {  3,  1 },       -- Right, below center connection (east-facing)
     },
 
     -- Third output: dual-connection box
     output_pipe{
-        pipe_pictures = pipe_pictures.a,  -- Uses pipe picture set 'a'
+        pipe_pictures = pipe_pictures.a,
         position = {
             {  1,  3 },  -- Right, bottom connection (south-facing)
             { -3,  1 },  -- Left, below center connection (west-facing)

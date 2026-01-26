@@ -39,7 +39,7 @@ function M.make_connection(position, flow_direction)
     end
 end
 
--- Creates a full fluid box, it's for more customized fluid-boxes
+-- Creates a full fluid box, it's also valid for singular fluid_box creation.
 function M.make_pipe(args)
     local connections = M.make_connection(args.position, args.flow_direction)
 

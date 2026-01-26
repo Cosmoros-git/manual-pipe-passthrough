@@ -1,4 +1,12 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.1.6
+Date: 2026-01-26
+  Features:
+    - Added settings to machine processing. You can disable any changes at any time.
+  Changes:
+    - Some minor changes and addition of settings helper for easier settings creation.
+
+---------------------------------------------------------------------------------------------------
 Version: 0.1.5
 Date: 2026-01-20
   Bugfixes:

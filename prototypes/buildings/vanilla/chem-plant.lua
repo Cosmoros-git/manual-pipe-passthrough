@@ -10,7 +10,7 @@ local machine_type = "assembling-machine"
 
 -- Pipe volume and output multiplier. Smaller output pipes output liquids much faster.
 local pipe_volume = 500
-local pipe_output_multipler = 1/5
+local pipe_output_multiplier = 1/5
 
 local function replace_4way_animation()
   local refinery = data.raw[machine_type][machine_name]
