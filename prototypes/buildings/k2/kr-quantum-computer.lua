@@ -1,8 +1,6 @@
 -- Helper functions
-local fbh = require("lib.fluid-box-helper")
-local replace_func = require("lib.replace-fluidbox")
-local replace = replace_func.replace_fluid_boxes
 local pipes_lib = require("lib.add-pipes-simple")
+local dh = require("lib.data-helper")
 
 -- Machine type and name. Can have many names.
 local machine_name = "kr-quantum-computer"
@@ -78,7 +76,5 @@ local pipe_args = {
     secondary_draw_orders = { north = -1 },
     always_draw_covers = true
 }
-local new_fluid_boxes = fbh.make_pipes(pipe_args)
-
 pipes_lib.add_pipes_simple(machine_name, machine_type, pipes_below, nil)
-replace(machine_name, machine_type, new_fluid_boxes)
+dh.replace_fluidboxes(machine_name, machine_type, pipe_args)

@@ -1,4 +1,22 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.2.1
+Date: 2026-01-30
+  Bugfixes:
+    - Fixed a hidden bug with pipe_picture. 
+  Features:
+    - Added support for assemblers, now my mod is sort of stand-alone capable.
+    - Made SE use their own pipe_pictures on space-assembler. Not sure why they were not used.
+
+---------------------------------------------------------------------------------------------------
+Version: 0.2.0
+Date: 2026-01-28
+  Bugfixes:
+    - Fixed pipe connectivity rules being lost because of my mod functionality. Now it all works correctly. 
+    - Fixed Oil Refinery ignoring graphics settings. 
+  Features:
+    - Simplified code requirement to add a new machine compatibility. 
+
+---------------------------------------------------------------------------------------------------
 Version: 0.1.6
 Date: 2026-01-26
   Features:

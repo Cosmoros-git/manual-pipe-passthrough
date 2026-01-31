@@ -1,8 +1,6 @@
 -- Helper functions
-local fbh = require("lib.fluid-box-helper")
-local replace_func = require("lib.replace-fluidbox")
 local pipes_lib = require("lib.add-pipes-simple")
-local replace = replace_func.replace_fluid_boxes
+local dh = require("lib.data-helper")
 
 -- Machine type and name. Can have many names.
 -- Machines that need pipes fixed. Sprite-wise.
@@ -61,13 +59,12 @@ local pipe_args = {
     secondary_draw_orders = { north = -1 },
 }
 
-local new_fluid_boxes = fbh.make_pipes(pipe_args)
 for _, name in ipairs(machines_add_pipes) do
-  replace(name, machine_type, new_fluid_boxes)
+  dh.replace_fluidboxes(name, machine_type, pipe_args)
   pipes_lib.add_pipes_simple(name, machine_type, pipes_below, pipes_above)
 end
 
-replace(plasma_gen, machine_type, new_fluid_boxes)
-replace(electro_lab, machine_type, new_fluid_boxes)
+dh.replace_fluidboxes(plasma_gen, machine_type, pipe_args)
+dh.replace_fluidboxes(electro_lab, machine_type, pipe_args)
 
 -- Electromagneitc and Plasma gen dont need new pipes. However electro_lab needs at least 2 outputs.

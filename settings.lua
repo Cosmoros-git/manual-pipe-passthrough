@@ -11,6 +11,7 @@ local settings = {
     },
     sth.bool_setting("v_oil-refinery", "a"),
     sth.bool_setting("v_chem-plant", "a"),
+    sth.bool_setting("v_assemblers", "a"),
 }
 
 if mods["Krastorio2"] or mods["Krastorio2-spaced-out"] then

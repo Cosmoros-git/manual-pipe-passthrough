@@ -1,8 +1,9 @@
 
 -- Helper functions
 local replace_func = require("lib.replace-fluidbox")
-local pipe_pictures = ""
+local pipe_pictures
 local fbh = require("lib.fluid-box-helper")
+local dh = require("lib.data-helper")
 
 --K2 references depending on mod.
 if K2_PIPE_PICTURES_MOD then
@@ -20,11 +21,17 @@ local machine_type = "assembling-machine"
 local pipe_volume = 1000
 local pipe_output_multiplier = 1/5
 
+-- Get conneciton rules out of the machine
+local machine = dh.get_machine(machine_name, machine_type)
+local input_rules, output_rules = fbh.extract_connection_rules(machine)
+
+
 local common_pipe_args_input = {
         pipe_covers     = pipecoverspictures(),
         secondary_draw_orders = { north = -1 },
         production_type = "input",
         volume = pipe_volume,
+        connection_rules = input_rules,
 }
 local common_pipe_args_output = {
         pipe_covers     = pipecoverspictures(),
@@ -32,6 +39,7 @@ local common_pipe_args_output = {
         production_type   = "output",
         volume            = pipe_volume,
         output_multiplier = pipe_output_multiplier,
+        connection_rules = output_rules
 }
 
 -- I am way too tired rn to search into utils
@@ -63,22 +71,22 @@ end
 
 local new_fluid_boxes = {
     -- INPUTS
-    
+
     -- First input: right side, slightly above center
     input_pipe{
-        pipe_pictures = pipe_pictures.a,
+        pipe_picture = pipe_pictures.a,
         position      = {  3, -1 },       -- Right, above center connection (east-facing)
     },
 
     -- Second input: left side, top
     input_pipe{
-        pipe_pictures = pipe_pictures.a,
+        pipe_picture = pipe_pictures.a,
         position      = { -1, -3 },       -- Left, top connection (north-facing)
     },
 
     -- Third input: dual-connection box
     input_pipe{
-        pipe_pictures = pipe_pictures.b, 
+        pipe_picture = pipe_pictures.b,
         position = {
             {  1, -3 },  -- Right, top connection (north-facing)
             { -3, -1 },  -- Left, above center connection (west-facing)
@@ -86,26 +94,29 @@ local new_fluid_boxes = {
     },
 
     -- OUTPUTS
-    
+
     -- First output: left side, bottom
     output_pipe{
-        pipe_pictures = pipe_pictures.b,
+        pipe_picture = pipe_pictures.b,
         position      = { -1,  3 },       -- Left, bottom connection (south-facing)
     },
 
     -- Second output: right side, slightly below center
     output_pipe{
-        pipe_pictures = pipe_pictures.b,
+        pipe_picture = pipe_pictures.b,
         position      = {  3,  1 },       -- Right, below center connection (east-facing)
     },
 
     -- Third output: dual-connection box
     output_pipe{
-        pipe_pictures = pipe_pictures.a,
+        pipe_picture = pipe_pictures.a,
         position = {
             {  1,  3 },  -- Right, bottom connection (south-facing)
             { -3,  1 },  -- Left, below center connection (west-facing)
         },
     },
 }
-replace(machine_name, machine_type, new_fluid_boxes)
+if pipe_pictures then
+   replace(machine, new_fluid_boxes) 
+end
+

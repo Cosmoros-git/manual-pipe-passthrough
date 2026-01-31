@@ -1,8 +1,6 @@
 -- Helper functions
-local fbh = require("lib.fluid-box-helper")
-local replace_func = require("lib.replace-fluidbox")
 local logger = require("lib.logger")
-local replace = replace_func.replace_fluid_boxes
+local dh = require("lib.data-helper")
 
 -- Machine type and name. Can have many names.
 local machine_name = "oil-refinery"
@@ -29,7 +27,7 @@ local function replace_oil_refinery_graphics(file_name)
         layers =
         {
           {
-            filename = "__manual-pipe-passthrough__/graphics/buildings/vanilla/oil-refinery/oil-refinery-alt.png",
+            filename = file_name,
             width = 386,
             height = 430,
             shift = util.by_pixel(0, -7.5),
@@ -48,7 +46,6 @@ local function replace_oil_refinery_graphics(file_name)
       refinery.graphics_set.animation = animation
   end
 end
-replace_oil_refinery_graphics()
 
 -- Vanilla style pipe positions
 local vanilla_style_pipe_positions_input = {
@@ -148,9 +145,9 @@ local file_name = alt_skin
     and "__manual-pipe-passthrough__/graphics/buildings/vanilla/oil-refinery/oil-refinery-alt.png"
     or "__manual-pipe-passthrough__/graphics/buildings/vanilla/oil-refinery/oil-refinery-1.png"
 
-local new_fluid_boxes = alt_skin
-    and fbh.make_pipes(simple_style_pipe_args)
-    or fbh.make_pipes(vanilla_style_pipe_args)
+local pipe_args = alt_skin
+    and simple_style_pipe_args
+    or vanilla_style_pipe_args
 
 replace_oil_refinery_graphics(file_name)
-replace(machine_name, machine_type, new_fluid_boxes)
+dh.replace_fluidboxes(machine_name, machine_type, pipe_args)

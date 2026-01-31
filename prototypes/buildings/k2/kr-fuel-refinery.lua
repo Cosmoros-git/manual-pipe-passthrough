@@ -1,9 +1,7 @@
 
 -- Helper functions
-local fbh = require("lib.fluid-box-helper")
-local replace_func = require("lib.replace-fluidbox")
 local logger = require("lib.logger")
-local replace = replace_func.replace_fluid_boxes
+local dh = require("lib.data-helper")
 
 -- Machine type and name. Can have many names
 local machine_name = "kr-fuel-refinery"
@@ -97,5 +95,4 @@ local pipe_args = {
 
     pipecoverspictures = pipecoverspictures(),
 }
-local new_fluid_boxes = fbh.make_pipes(pipe_args)
-replace(machine_name, machine_type, new_fluid_boxes)
+dh.replace_fluidboxes(machine_name, machine_type, pipe_args)

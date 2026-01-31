@@ -1,7 +1,5 @@
 -- Helper functions
-local replace_func = require("lib.replace-fluidbox")
-local replace = replace_func.replace_fluid_boxes
-local fbh = require("lib.fluid-box-helper")
+local dh = require("lib.data-helper")
 
 --K2 references depending on mod.
 local pipe_pictures = ""
@@ -39,5 +37,4 @@ local pipe_args = {
     pipe_picture = pipe_pictures,
     pipecoverspictures = pipecoverspictures(),
 }
-local new_fluid_boxes = fbh.make_pipes(pipe_args)
-replace(machine_name, machine_type, new_fluid_boxes)
+dh.replace_fluidboxes(machine_name, machine_type, pipe_args)

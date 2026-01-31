@@ -3,6 +3,7 @@ local loader = require("lib.settings-helper") -- Helps making this less of a mes
 -- VANILLA
 loader.load_if_enabled("v_oil-refinery", "prototypes.buildings.vanilla.oil-refinery")
 loader.load_if_enabled("v_chem-plant",  "prototypes.buildings.vanilla.chem-plant")
+loader.load_if_enabled("v_assemblers",  "prototypes.buildings.vanilla.assemblers")
 
 -- SPACED OUT
 if mods["spaced-out"] or mods["sei-cryogenic-plant"] then
@@ -26,6 +27,7 @@ if K2_PIPE_PICTURES_MOD then
   loader.load_if_enabled("kr-quantum-computer",        k2_loc.."kr-quantum-computer")
   loader.load_if_enabled("kr-matter-plant",            k2_loc.."kr-matter-plant")
   loader.load_if_enabled("kr-electrolysis-plant",      k2_loc.."kr-electrolysis-plant")
+  loader.load_if_enabled("kr-advanced-assembler",      k2_loc.."kr-advanced-assembler")
 end
 
 -- SPACE EXPLORATION
@@ -38,6 +40,7 @@ if mods["space-exploration"] then
   loader.load_if_enabled("se-partice-acc-col-fab",                                se_loc.."se-partice-acc-col-fab")
   loader.load_if_enabled("se-decontamination-lifesupport-facility",               se_loc.."se-decontamination-lifesupport-facility")
   loader.load_if_enabled("se-space-manufactory",                                  se_loc.."se-space-manufactory")
+  loader.load_if_enabled("se-space-assembler",                                    se_loc.."se-space-assembler")
   loader.load_if_enabled("se-genetics-laboratory",                                se_loc.."se-genetics-laboratory")
   loader.load_if_enabled("se-recycler-pulveriser-mechanical",                     se_loc.."se-recycler-pulveriser-mechanical")
 end

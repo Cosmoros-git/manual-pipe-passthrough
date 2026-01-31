@@ -1,6 +1,6 @@
 {
     "name": "manual-pipe-passthrough",
-    "version": "0.1.6",
+    "version": "0.2.1",
     "title": "Manual Assembler Pipe Passthrough",
     "author": "Cosmoros",
     "factorio_version": "2.0",
@@ -12,6 +12,7 @@
         "(?) Krastorio2",
         "(?) Krastorio2-spaced-out",
         "(?) space-exploration",
-        "(?) SE_xors_tweaks_fork_fox"
+        "(?) SE_xors_tweaks_fork_fox",
+        "(?) Assembler-Reskin"
     ]
 }

@@ -1,7 +1,5 @@
 -- Helper functions
-local fbh = require("lib.fluid-box-helper")
-local replace_func = require("lib.replace-fluidbox")
-local replace = replace_func.replace_fluid_boxes
+local dh = require("lib.data-helper")
 
 -- Machine type and name. Can have many names.
 local mechanical ="se-space-mechanical-laboratory"
@@ -104,11 +102,6 @@ local mechanical_facility_pipe_args = {
     secondary_draw_orders = { north = -1 },
 }
 
-
-local mechanical_facility_fluid_boxes = fbh.make_pipes(mechanical_facility_pipe_args)
-local macerator_fluid_boxes = fbh.make_pipes(macerator_pipe_args)
-local recycler_fluid_boxes = fbh.make_pipes(recycler_pipe_args)
-
-replace(mechanical,machine_type,mechanical_facility_fluid_boxes)
-replace(macerator,machine_type,macerator_fluid_boxes)
-replace(recycler,machine_type,recycler_fluid_boxes)
+dh.replace_fluidboxes(mechanical, machine_type, mechanical_facility_pipe_args)
+dh.replace_fluidboxes(macerator, machine_type, macerator_pipe_args)
+dh.replace_fluidboxes(recycler, machine_type, recycler_pipe_args)

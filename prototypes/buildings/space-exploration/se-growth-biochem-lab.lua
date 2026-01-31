@@ -1,11 +1,5 @@
 -- Helper functions
-local fbh = require("lib.fluid-box-helper")
-
-
-
-
-local replace_func = require("lib.replace-fluidbox")
-local replace = replace_func.replace_fluid_boxes
+local dh = require("lib.data-helper")
 
 -- Machine type and name. Can have many names.
 local growth_facility = "se-space-growth-facility"
@@ -71,7 +65,5 @@ local pipe_args = {
     pipecoverspictures = pipecoverspictures(),
     secondary_draw_orders = { north = -1 },
 }
-
-local new_fluid_boxes = fbh.make_pipes(pipe_args)
-replace(biochemical_lab, machine_type, new_fluid_boxes)
-replace(growth_facility, machine_type, new_fluid_boxes)
+dh.replace_fluidboxes(biochemical_lab, machine_type, pipe_args)
+dh.replace_fluidboxes(growth_facility, machine_type, pipe_args)

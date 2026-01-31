@@ -1,7 +1,5 @@
 -- Helper functions
-local replace_func = require("lib.replace-fluidbox")
-local replace = replace_func.replace_fluid_boxes
-local fbh = require("lib.fluid-box-helper")
+local dh = require("lib.data-helper")
 
 -- K2 Pipe pictures dependency
 local pipe_pictures = ""
@@ -11,7 +9,7 @@ if K2_PIPE_PICTURES_MOD then
             ".prototypes.buildings.pipe-picture")
 end
 -- Machine type and name. Can be many names
-local condenser = "kr-electrolysis-plant"
+local machine_name = "kr-electrolysis-plant"
 local machine_type = "assembling-machine"
 
 -- Pipe volume and output multiplier. Smaller output pipes output liquids much faster.
@@ -43,5 +41,4 @@ local pipe_args = {
 
     secondary_draw_orders = { north = -1 },
 }
-local new_fluid_boxes = fbh.make_pipes(pipe_args)
-replace(condenser, machine_type, new_fluid_boxes)
+dh.replace_fluidboxes(machine_name,machine_type,pipe_args)

@@ -38,6 +38,7 @@ function M.k2_settings()
   bool_setting("kr-quantum-computer", "kr"),
   bool_setting("kr-matter-plant", "kr"),
   bool_setting("kr-electrolysis-plant", "kr"),
+  bool_setting("kr-advanced-assembler", "kr"),
   }
 end
 
@@ -52,7 +53,8 @@ function M.se_settings()
   bool_setting("se-decontamination-lifesupport-facility", "se"),
   bool_setting("se-space-manufactory", "se"),
   bool_setting("se-genetics-laboratory", "se"),
-  bool_setting("se-recycler-pulveriser-mechanical", "se")
+  bool_setting("se-recycler-pulveriser-mechanical", "se"),
+  bool_setting("se-space-assembler", "kr"),
   }
 end
 
