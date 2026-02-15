@@ -21,7 +21,7 @@ local function replace_4way_animation()
     animation = make_4way_animation_from_spritesheet({ layers =
       {
         {
-          filename = "__manual-pipe-passthrough__/graphics/buildings/vanilla/chemical-plant/pipes-below-v3.png",
+          filename = "__manual-pipe-passthrough__/graphics/buildings/vanilla/chemical-plant/pipes-below.png",
           width = 220,
           height = 292,
           frame_count = 1,
@@ -40,7 +40,7 @@ local function replace_4way_animation()
           scale = 0.5
         },
         {
-          filename = "__manual-pipe-passthrough__/graphics/buildings/vanilla/chemical-plant/pipes-above-v3.png",
+          filename = "__manual-pipe-passthrough__/graphics/buildings/vanilla/chemical-plant/pipes-above.png",
           width = 220,
           height = 292,
           frame_count = 1,
@@ -89,7 +89,7 @@ local pipe_args = {
     pipe_positions_input = pipe_positions_input,
     pipe_positions_output = pipe_positions_output,
     
-    pipecoverspictures = pipecoverspictures(),
+    pipe_covers = pipecoverspictures(),
     secondary_draw_orders = { north = -1 },
 }
 

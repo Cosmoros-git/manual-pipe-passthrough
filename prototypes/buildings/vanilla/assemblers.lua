@@ -37,7 +37,7 @@ local pipe_args_2 = {
     pipe_positions_output = pipe_positions_output,
 
     pipe_picture = pipepictures2,
-    pipecoverspictures = pipecoverspictures(),
+    pipe_covers = pipecoverspictures(),
     secondary_draw_orders = { north = -1 },
     always_draw_covers =false
 }
@@ -49,7 +49,7 @@ local pipe_args_3 = {
     pipe_positions_output = pipe_positions_output,
 
     pipe_picture = pipepictures3,
-    pipecoverspictures = pipecoverspictures(),
+    pipe_covers = pipecoverspictures(),
     secondary_draw_orders = { north = -1 },
     always_draw_covers =false
 }

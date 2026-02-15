@@ -32,7 +32,7 @@ local recycler_pipe_args = {
     pipe_positions_input = recycler_pipe_positions_input,
     pipe_positions_output = recycler_pipe_positions_output,
     
-    pipecoverspictures = pipecoverspictures(),
+    pipe_covers = pipecoverspictures(),
     secondary_draw_orders = { north = -1 },
 }
 
@@ -63,7 +63,7 @@ local macerator_pipe_args = {
     pipe_positions_input = macerator_pipe_positions_input,
     pipe_positions_output = macerator_pipe_positions_output,
     
-    pipecoverspictures = pipecoverspictures(),
+    pipe_covers = pipecoverspictures(),
     secondary_draw_orders = { north = -1 },
 }
 
@@ -98,7 +98,7 @@ local mechanical_facility_pipe_args = {
     pipe_positions_input = mechanical_facility_pipe_positions_input,
     pipe_positions_output = mechanical_facility_pipe_positions_output,
     
-    pipecoverspictures = pipecoverspictures(),
+    pipe_covers = pipecoverspictures(),
     secondary_draw_orders = { north = -1 },
 }
 

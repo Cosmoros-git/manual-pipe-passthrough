@@ -1,4 +1,15 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.2.2
+Date: 2026-02-09
+  Bugfixes:
+    - Fixed bug caused by me mixing up pipe_covers and pipecoverspictures in fluix-boxes.
+    - Fixed incompatibility with Planet Muluna
+  Features:
+    - Added full support for Quality Assurance Mod. 
+    - Added foundry and biochamber to the list of managed machines.
+    - Cleaned unused graphics. 
+
+---------------------------------------------------------------------------------------------------
 Version: 0.2.1
 Date: 2026-01-30
   Bugfixes:

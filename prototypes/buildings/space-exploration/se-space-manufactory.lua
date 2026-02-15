@@ -80,9 +80,9 @@ local pipe_args = {
     pipe_positions_input = pipe_positions_input,
     pipe_positions_output = pipe_positions_output,
     
-    pipecoverspictures = pipecoverspictures(),
+    pipe_covers = pipecoverspictures(),
     secondary_draw_orders = { north = -1 },
 }
 
-pipes_lib.add_pipes_simple(machine_name, machine_type, pipes_below, pipes_above)
+pipes_lib.add_pipes_simple_to_animation(machine_name, machine_type, pipes_below, pipes_above)
 dh.replace_fluidboxes(machine_name, machine_type, pipe_args)

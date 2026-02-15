@@ -1,41 +1,58 @@
 local logger = require("lib.logger")
+local dh = require("lib.data-helper")
 
 local M = {}
 
-function M.add_pipes_simple(machine_name, machine_type, pipes_under, pipes_above)
-  local entity = data.raw[machine_type] and data.raw[machine_type][machine_name]
-  if not entity or not entity.graphics_set or not entity.graphics_set.animation then
-    logger.error(machine_name .. " not found graphics.")
-    return
+function M.add_pipes_simple_to_animation(machine_name, machine_type, pipes_under, pipes_above)
+
+  local function patch(entity_name, machine)
+    if not machine or not machine.graphics_set or not machine.graphics_set.animation then
+      logger.error(entity_name .. " not found graphics.")
+      return
+    end
+
+    local old_anim = machine.graphics_set.animation
+    local old_layers = old_anim.layers
+
+    -- If animation has no layers warps it around in a layer.
+    if not old_layers then
+      old_layers = { old_anim }
+    end
+
+    if not old_layers[1] then
+      logger.error(entity_name .. " animation has no base layer.")
+      return
+    end
+
+    local new_layers = {}
+
+    if pipes_under then table.insert(new_layers, pipes_under) end
+    table.insert(new_layers, old_layers[1])
+    if pipes_above then table.insert(new_layers, pipes_above) end
+
+    for i = 2, #old_layers do
+      table.insert(new_layers, old_layers[i])
+    end
+
+    -- Preserve other old_anim fields if it already had them (when layered)
+    old_anim.layers = new_layers
+    machine.graphics_set.animation = old_anim
+
+    logger.info(entity_name .. " Animation Fixed.")
   end
 
-  local old_anim = entity.graphics_set.animation
-  local old_layers = old_anim.layers
-  local new_layers = {}
-
-  -- Optional: pipes under
-  if pipes_under then
-    table.insert(new_layers, pipes_under)
+  local machine = dh.get_machine(machine_name, machine_type)
+  if machine then
+    patch(machine_name, machine)
   end
 
-  -- Original base layer (required)
-  table.insert(new_layers, old_layers[1])
-
-  -- Optional: pipes above
-  if pipes_above then
-    table.insert(new_layers, pipes_above)
+  if QAM_ENABLED then
+    local qam_name = QAM_PREFIX .. machine_name .. QAM_SUFFIX
+    local qam_machine = dh.get_machine(qam_name, machine_type)
+    if qam_machine then
+      patch(qam_name, qam_machine)
+    end
   end
-
-  -- Preserve remaining original layers (shadow, glow, etc.)
-  for i = 2, #old_layers do
-    table.insert(new_layers, old_layers[i])
-  end
-
-  entity.graphics_set.animation = {
-    layers = new_layers
-  }
-
-  logger.info(machine_name .. " Animation Fixed.")
 end
 
 return M

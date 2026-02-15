@@ -87,7 +87,7 @@ local vanilla_style_pipe_args = {
     pipe_positions_input = vanilla_style_pipe_positions_input,
     pipe_positions_output = vanilla_style_pipe_positions_output,
 
-    pipecoverspictures = pipecoverspictures(),
+    pipe_covers = pipecoverspictures(),
     secondary_draw_orders = { north = -1 },
 }
 
@@ -135,7 +135,7 @@ local simple_style_pipe_args = {
     pipe_positions_input = simple_style_pipe_positions_input,
     pipe_positions_output = simple_style_pipe_positions_output,
 
-    pipecoverspictures = pipecoverspictures(),
+    pipe_covers = pipecoverspictures(),
     secondary_draw_orders = { north = -1 },
 }
 

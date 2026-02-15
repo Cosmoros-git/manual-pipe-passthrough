@@ -30,7 +30,7 @@ local pipe_positions_output = {
 local pipe_args = {
     volume = pipe_volume,
     pipe_positions_output = pipe_positions_output,
-    pipecoverspictures = pipecoverspictures(),
+    pipe_covers = pipecoverspictures(),
 
     secondary_draw_orders = { north = -1 },
 }

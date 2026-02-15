@@ -62,7 +62,7 @@ local pipe_args = {
     pipe_positions_input = pipe_positions_input,
     pipe_positions_output = pipe_positions_output,
 
-    pipecoverspictures = pipecoverspictures(),
+    pipe_covers = pipecoverspictures(),
     secondary_draw_orders = { north = -1 },
 }
 dh.replace_fluidboxes(biochemical_lab, machine_type, pipe_args)

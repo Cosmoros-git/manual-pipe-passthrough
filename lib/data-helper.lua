@@ -22,16 +22,29 @@ function M.get_machine(machine_name, machine_type)
     return machine
 end
 
-function M.replace_fluidboxes(machine_name, machine_type,pipe_args)
-    local machine = M.get_machine(machine_name,machine_type)
-    if machine then
-        local input_rules, output_rules = fbh.extract_connection_rules(machine)
-        local new_fluid_boxes = fbh.make_pipes(pipe_args, {
-            input_rules = input_rules,
-            output_rules = output_rules
-        })
-        replace(machine, new_fluid_boxes)
+function M.replace_fluidboxes(machine_name, machine_type, pipe_args)
+  local function patch(m)
+    local input_rules, output_rules = fbh.extract_connection_rules(m)
+    local new_fluid_boxes = fbh.make_pipes(pipe_args, {
+      input_rules = input_rules,
+      output_rules = output_rules
+    })
+    replace(m, new_fluid_boxes)
+  end
+
+  local machine = M.get_machine(machine_name, machine_type)
+  if machine then
+    patch(machine)
+  end
+
+  -- Should work on QAM machines. If they exist. If they dont, it will do nothin.
+  if QAM_ENABLED then
+      local qam_name = QAM_PREFIX .. machine_name .. QAM_SUFFIX
+      local qam_machine = M.get_machine(qam_name, machine_type)
+      if qam_machine then
+        patch(qam_machine)
     end
+  end
 end
 
 return M

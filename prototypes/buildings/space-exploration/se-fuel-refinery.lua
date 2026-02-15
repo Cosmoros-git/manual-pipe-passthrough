@@ -90,7 +90,7 @@ local pipe_args = {
     pipe_positions_input = pipe_positions_input,
     pipe_positions_output = pipe_positions_output,
 
-    pipecoverspictures = pipecoverspictures(),
+    pipe_covers = pipecoverspictures(),
 }
 
 dh.replace_fluidboxes(machine_name, machine_type, pipe_args)

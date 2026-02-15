@@ -133,7 +133,39 @@ function M.make_pipes(args,rules)
                 position = pos,
                 flow_direction = args.flow_direction,
                 pipe_picture = args.pipe_picture,
-                pipe_covers = args.pipecoverspictures,
+                pipe_covers = args.pipe_covers,
+                secondary_draw_orders = args.secondary_draw_orders,
+                always_draw_covers = args.always_draw_covers,
+                connection_rules = rule
+            })
+        end
+    end
+
+    add_pipes(args.pipe_positions_input or {}, "input")
+    add_pipes(args.pipe_positions_output or {}, "output")
+
+    return new_fbh_boxes
+end
+
+-- WHY DOES BIOCHAMBER HAS TO BE THIS MESS?
+function M.make_pipes_biochamber(args,rules)
+    local new_fbh_boxes = {}
+
+    local function add_pipes(positions, production_type)
+        for _, pos in ipairs(positions) do
+            local rule =
+                production_type == "input"
+                and rules.input_rules
+                or rules.output_rules
+            table.insert(new_fbh_boxes, M.make_pipe{
+                
+                production_type = production_type,
+                volume = args.volume,
+                output_multiplier = args.output_multiplier,
+                position = pos,
+                flow_direction = args.flow_direction,
+                pipe_picture = args.pipe_picture,
+                pipe_covers = args.pipe_covers,
                 secondary_draw_orders = args.secondary_draw_orders,
                 always_draw_covers = args.always_draw_covers,
                 connection_rules = rule

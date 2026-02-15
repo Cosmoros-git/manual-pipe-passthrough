@@ -55,13 +55,13 @@ local pipe_args = {
     pipe_positions_input = pipe_positions_input,
     pipe_positions_output = pipe_positions_output,
     
-    pipecoverspictures = pipecoverspictures(),
+    pipe_covers = pipecoverspictures(),
     secondary_draw_orders = { north = -1 },
 }
 
 for _, name in ipairs(machines_add_pipes) do
   dh.replace_fluidboxes(name, machine_type, pipe_args)
-  pipes_lib.add_pipes_simple(name, machine_type, pipes_below, pipes_above)
+  pipes_lib.add_pipes_simple_to_animation(name, machine_type, pipes_below, pipes_above)
 end
 
 dh.replace_fluidboxes(plasma_gen, machine_type, pipe_args)

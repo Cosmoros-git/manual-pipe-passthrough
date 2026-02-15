@@ -16,6 +16,8 @@ local machine_type = "assembling-machine"
 local pipe_volume = 200
 -- Output multiplier not needed when there is no inputs.
 
+
+
 local pipe_positions_input = {
     {{ -2, -1 },  -- Top left input (west-facing)
     { 2, -1 }},   -- Bottom left input (east-facing)

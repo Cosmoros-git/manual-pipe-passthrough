@@ -33,9 +33,9 @@ local pipes_below = {
 }
 
 -- In SE it hiding its fluid boxes kinda makes no sense. And I dont want to deal with drawing custom pipe covers...
-local entity = data.raw[machine_type] and data.raw[machine_type][machine_name]
-  if entity then
-        entity.fluid_boxes_off_when_no_fluid_recipe = false
+local machine = dh.get_machine(machine_name,machine_type)
+  if machine then
+        machine.fluid_boxes_off_when_no_fluid_recipe = false
   else
 end
 
@@ -72,9 +72,9 @@ local pipe_args = {
     pipe_positions_input = pipe_positions_input,
     pipe_positions_output = pipe_positions_output,
 
-    pipecoverspictures = pipecoverspictures(),
+    pipe_covers = pipecoverspictures(),
     secondary_draw_orders = { north = -1 },
     always_draw_covers = true
 }
-pipes_lib.add_pipes_simple(machine_name, machine_type, pipes_below, nil)
+pipes_lib.add_pipes_simple_to_animation(machine_name, machine_type, pipes_below, nil)
 dh.replace_fluidboxes(machine_name, machine_type, pipe_args)

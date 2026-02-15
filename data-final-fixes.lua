@@ -1,5 +1,21 @@
 local loader = require("lib.settings-helper") -- Helps making this less of a mess.
 
+--- Pipe pictures for mods
+-- KRASTORIO 2
+K2_PIPE_PICTURES_MOD =
+    mods["Krastorio2-spaced-out"] and "__Krastorio2-spaced-out__"
+    or mods["Krastorio2"] and "__Krastorio2__"
+    or nil
+
+
+
+
+if mods["QualityAssurance"] then
+  QAM_ENABLED = true
+  QAM_PREFIX = "qa_"
+  QAM_SUFFIX = "-ams"
+end
+
 -- VANILLA
 loader.load_if_enabled("v_oil-refinery", "prototypes.buildings.vanilla.oil-refinery")
 loader.load_if_enabled("v_chem-plant",  "prototypes.buildings.vanilla.chem-plant")
@@ -7,15 +23,16 @@ loader.load_if_enabled("v_assemblers",  "prototypes.buildings.vanilla.assemblers
 
 -- SPACED OUT
 if mods["spaced-out"] or mods["sei-cryogenic-plant"] then
-  loader.load_if_enabled("sei_cryogenic-plant",
-    "prototypes.buildings.spaced-out.cryogenic-plant")
+  loader.load_if_enabled("sei_cryogenic-plant",    "prototypes.buildings.spaced-out.cryogenic-plant")
+  loader.load_if_enabled("sei_foundry",    "prototypes.buildings.spaced-out.foundry")
+  loader.load_if_enabled("sei_biochamber",    "prototypes.buildings.spaced-out.biochamber")
 end
 
--- KRASTORIO 2
-K2_PIPE_PICTURES_MOD =
-    mods["Krastorio2-spaced-out"] and "__Krastorio2-spaced-out__"
-    or mods["Krastorio2"] and "__Krastorio2__"
-    or nil
+QAM_ENABLED = false
+QAM_PREFIX = ""
+QAM_SUFFIX = ""
+
+
 
 local k2_loc = "prototypes.buildings.k2."
 if K2_PIPE_PICTURES_MOD then

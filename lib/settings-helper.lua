@@ -54,13 +54,15 @@ function M.se_settings()
   bool_setting("se-space-manufactory", "se"),
   bool_setting("se-genetics-laboratory", "se"),
   bool_setting("se-recycler-pulveriser-mechanical", "se"),
-  bool_setting("se-space-assembler", "kr"),
+  bool_setting("se-space-assembler", "se"),
   }
 end
 
 function M.spaced_out_settings()
   return {
   bool_setting("sei_cryogenic-plant", "sei"),
+  bool_setting("sei_foundry", "sei"),
+  bool_setting("sei_biochamber", "sei"),
   }
 end
 
