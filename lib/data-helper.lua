@@ -47,4 +47,38 @@ function M.replace_fluidboxes(machine_name, machine_type, pipe_args)
   end
 end
 
+
+function M.replace_fluidboxes_and_power_source(machine_name, machine_type, pipe_args, power_source_connections)
+  local function patch(m)
+    local input_rules, output_rules = fbh.extract_connection_rules(m)
+    local new_fluid_boxes = fbh.make_pipes(pipe_args, {
+      input_rules = input_rules,
+      output_rules = output_rules
+    })
+    replace(m, new_fluid_boxes)
+  end
+
+  local machine = M.get_machine(machine_name, machine_type)
+  if machine then
+    fbh.replace_energy_source_pipe_connections(machine, power_source_connections)
+    patch(machine)
+  end
+
+  -- Should work on QAM machines. If they exist. If they dont, it will do nothin.
+  if QAM_ENABLED then
+      local qam_name = QAM_PREFIX .. machine_name .. QAM_SUFFIX
+      local qam_machine = M.get_machine(qam_name, machine_type)
+      if qam_machine then
+        fbh.replace_energy_source_pipe_connections(qam_machine, power_source_connections)
+        patch(qam_machine)
+    end
+  end
+end
+
+function M.replace_fluid_power_source_connections(machine, positions)
+  if machine then
+    fbh.replace_energy_source_pipe_connections(machine, positions)
+  end
+end
+
 return M

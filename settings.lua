@@ -26,8 +26,14 @@ if mods["space-exploration"] then
   end
 end
 
-if mods["spaced-out"] or mods["sei-cryogenic-plant"] then
+if mods["space-age"] or mods["sei-library"] then
   for _, s in pairs(sth.spaced_out_settings()) do
+    table.insert(settings, s)
+  end
+end
+
+if mods["apm_power_ldinc"] then
+  for _, s in pairs(sth.apm_settings()) do
     table.insert(settings, s)
   end
 end

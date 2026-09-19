@@ -7,30 +7,32 @@ K2_PIPE_PICTURES_MOD =
     or mods["Krastorio2"] and "__Krastorio2__"
     or nil
 
-
-
-
+-- Deals with quality assurance mod. 
 if mods["QualityAssurance"] then
   QAM_ENABLED = true
   QAM_PREFIX = "qa_"
   QAM_SUFFIX = "-ams"
+else
+  QAM_ENABLED = false
+  QAM_PREFIX = ""
+  QAM_SUFFIX = ""
 end
 
 -- VANILLA
-loader.load_if_enabled("v_oil-refinery", "prototypes.buildings.vanilla.oil-refinery")
-loader.load_if_enabled("v_chem-plant",  "prototypes.buildings.vanilla.chem-plant")
-loader.load_if_enabled("v_assemblers",  "prototypes.buildings.vanilla.assemblers")
+local vanilla_loc = "prototypes.buildings.vanilla."
+-- loader.load_if_enabled("v_oil-refinery",    vanilla_loc.."oil-refinery") Disabled until sprite update
+loader.load_if_enabled("v_chem-plant",      vanilla_loc.."chem-plant")
+loader.load_if_enabled("v_assemblers",      vanilla_loc.."assemblers")
 
--- SPACED OUT
-if mods["spaced-out"] or mods["sei-cryogenic-plant"] then
-  loader.load_if_enabled("sei_cryogenic-plant",    "prototypes.buildings.spaced-out.cryogenic-plant")
-  loader.load_if_enabled("sei_foundry",    "prototypes.buildings.spaced-out.foundry")
-  loader.load_if_enabled("sei_biochamber",    "prototypes.buildings.spaced-out.biochamber")
+-- SPACE AGE
+local spacedOut_loc ="prototypes.buildings.space-age."
+if mods["sei-library-2"] or mods["space-age"] then
+  loader.load_if_enabled("sei_cryogenic-plant",    spacedOut_loc.."cryogenic-plant")
+  loader.load_if_enabled("sei_foundry",            spacedOut_loc.."foundry")
+  loader.load_if_enabled("sei_biochamber",         spacedOut_loc.."biochamber")
 end
 
-QAM_ENABLED = false
-QAM_PREFIX = ""
-QAM_SUFFIX = ""
+
 
 
 
@@ -60,4 +62,20 @@ if mods["space-exploration"] then
   loader.load_if_enabled("se-space-assembler",                                    se_loc.."se-space-assembler")
   loader.load_if_enabled("se-genetics-laboratory",                                se_loc.."se-genetics-laboratory")
   loader.load_if_enabled("se-recycler-pulveriser-mechanical",                     se_loc.."se-recycler-pulveriser-mechanical")
+end
+
+
+-- APM enabled
+local apm_loc = "prototypes.buildings.amathor."
+if mods["apm_power_ldinc"] then
+  loader.load_if_enabled("apm-air-cleaning-machine", apm_loc .. "air_cleaning_machine")
+  loader.load_if_enabled("apm-assembler",            apm_loc .. "assembler")
+  loader.load_if_enabled("apm-centrifuge",           apm_loc .. "centrifuge")
+  loader.load_if_enabled("apm-coking-plant",         apm_loc .. "coking_plant")
+  loader.load_if_enabled("apm-crushers",             apm_loc .. "crushers")
+  loader.load_if_enabled("apm-greenhouse",           apm_loc .. "greenhouse")
+  loader.load_if_enabled("apm-press-machine",        apm_loc .. "press_machine")
+  loader.load_if_enabled("apm-puddling-furnace",     apm_loc .. "puddling_furnace")
+  loader.load_if_enabled("apm-sieve",                apm_loc .. "sieve")
+  loader.load_if_enabled("apm-steelworks",           apm_loc .. "steelworks")
 end

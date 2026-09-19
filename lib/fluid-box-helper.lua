@@ -1,3 +1,5 @@
+local logger = require("lib.logger")
+
 local M = {}
 
 -- Map position → direction automatically
@@ -62,6 +64,25 @@ function M.extract_connection_rules(machine)
 end
 
 
+function M.replace_energy_source_pipe_connections(machine, positions)
+    if not machine
+       or not machine.energy_source
+       or not machine.energy_source.fluid_box then
+        return
+    end
+
+    local new_connections = {}
+
+    for _, pos in ipairs(positions or {}) do
+        table.insert(new_connections, {
+            flow_direction = "input-output",
+            position = pos,
+            direction = dir_from_pos[position_key(pos)]
+        })
+    end
+
+    machine.energy_source.fluid_box.pipe_connections = new_connections
+end
 
 -- Makes directions depending if given input is array (connected connections or singular)
 function M.make_connection(position, flow_direction, con_rules)
@@ -101,7 +122,9 @@ function M.make_pipe(args)
     local pipe = {
         production_type = args.production_type,
         pipe_covers     = args.pipe_covers,
+        pipe_covers_frozen = args.pipe_covers_frozen,
         pipe_picture   = args.pipe_picture,
+        pipe_picture_frozen = args.pipe_picture_frozen,
         volume          = args.volume * (args.output_multiplier or 1),
         pipe_connections = connections
     }
@@ -126,7 +149,6 @@ function M.make_pipes(args,rules)
                 and rules.input_rules
                 or rules.output_rules
             table.insert(new_fbh_boxes, M.make_pipe{
-                
                 production_type = production_type,
                 volume = args.volume,
                 output_multiplier = args.output_multiplier,
@@ -134,6 +156,8 @@ function M.make_pipes(args,rules)
                 flow_direction = args.flow_direction,
                 pipe_picture = args.pipe_picture,
                 pipe_covers = args.pipe_covers,
+                pipe_covers_frozen = args.pipe_covers_frozen,
+                pipe_picture_frozen = args.pipe_picture_frozen,
                 secondary_draw_orders = args.secondary_draw_orders,
                 always_draw_covers = args.always_draw_covers,
                 connection_rules = rule
@@ -147,35 +171,4 @@ function M.make_pipes(args,rules)
     return new_fbh_boxes
 end
 
--- WHY DOES BIOCHAMBER HAS TO BE THIS MESS?
-function M.make_pipes_biochamber(args,rules)
-    local new_fbh_boxes = {}
-
-    local function add_pipes(positions, production_type)
-        for _, pos in ipairs(positions) do
-            local rule =
-                production_type == "input"
-                and rules.input_rules
-                or rules.output_rules
-            table.insert(new_fbh_boxes, M.make_pipe{
-                
-                production_type = production_type,
-                volume = args.volume,
-                output_multiplier = args.output_multiplier,
-                position = pos,
-                flow_direction = args.flow_direction,
-                pipe_picture = args.pipe_picture,
-                pipe_covers = args.pipe_covers,
-                secondary_draw_orders = args.secondary_draw_orders,
-                always_draw_covers = args.always_draw_covers,
-                connection_rules = rule
-            })
-        end
-    end
-
-    add_pipes(args.pipe_positions_input or {}, "input")
-    add_pipes(args.pipe_positions_output or {}, "output")
-
-    return new_fbh_boxes
-end
 return M

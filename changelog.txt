@@ -1,4 +1,26 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.2.5
+Date: 2026-09-13
+  Changes:
+    - Updated to 2.1 no major changes done.
+
+---------------------------------------------------------------------------------------------------
+Version: 0.2.4
+Date: 2026-04-15
+  Features:
+    - Small cleanup.
+    - Added implementation for APM mod.
+
+---------------------------------------------------------------------------------------------------
+Version: 0.2.3
+Date: 2026-03-22
+  Bugfixes:
+    - Fixed a bug that caused any SA buildings to not process if Cryo-plant was not installed.
+    - Fixed a bug caused by me confusing spaced-out and space-age. Now my fixes work on vanilla.
+  Features:
+    - Small cleanup.
+
+---------------------------------------------------------------------------------------------------
 Version: 0.2.2
 Date: 2026-02-09
   Bugfixes:

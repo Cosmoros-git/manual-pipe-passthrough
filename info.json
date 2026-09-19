@@ -1,12 +1,12 @@
 {
     "name": "manual-pipe-passthrough",
-    "version": "0.2.2",
+    "version": "0.2.5",
     "title": "Manual Assembler Pipe Passthrough",
     "author": "Cosmoros",
-    "factorio_version": "2.0",
+    "factorio_version": "2.1",
     "description": "Sometimes assembler-pipe-passthrough mod does a really poor-looking job. So I made this more-hands-on mod that allows me to fix those issues",
     "dependencies": [
-        "base >= 2.0",
+        "base >= 2.1",
         "? assembler-pipe-passthrough",
         "(?) Krastorio2Assets",
         "(?) Krastorio2",
@@ -16,8 +16,10 @@
         "(?) Assembler-Reskin",
         "(?) QualityAssurance",
         "(?) planet-muluna",
-        "(?) sei-biochamber",
-        "(?) sei-foundry",
-        "(?) sei-cryogenic-plant"
+        "(?) sei-biochamber-2",
+        "(?) sei-foundry-2",
+        "(?) sei-cryogenic-plant-2",
+        "(?) space-age",
+        "(?) apm_power_ldinc"
     ]
 }

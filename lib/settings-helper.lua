@@ -66,4 +66,19 @@ function M.spaced_out_settings()
   }
 end
 
+function M.apm_settings()
+  return {
+    bool_setting("apm-air-cleaning-machine", "apm-a"),
+    bool_setting("apm-assembler",            "apm-b"),
+    bool_setting("apm-centrifuge",           "apm-c"),
+    bool_setting("apm-coking-plant",         "apm-d"),
+    bool_setting("apm-crushers",             "apm-e"),
+    bool_setting("apm-greenhouse",           "apm-f"),
+    bool_setting("apm-press-machine",        "apm-g"),
+    bool_setting("apm-puddling-furnace",     "apm-h"),
+    bool_setting("apm-sieve",                "apm-i"),
+    bool_setting("apm-steelworks",           "apm-j"),
+  }
+end
+
 return M
